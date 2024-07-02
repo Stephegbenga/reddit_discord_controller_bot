@@ -38,7 +38,12 @@ async function run_background_process(){
         return res.send({success: true, message: "received"});
       } else {
         data["status"] = "failed";
-        data["reason"] = "Not a valid post link";
+
+        if(reddit_channel){
+          data["reason"] = "Not a valid post link";
+        }else{
+          data["reason"] = "link is empty";
+        }
         save_completed_task("Sheet1", data);
       }
     }
