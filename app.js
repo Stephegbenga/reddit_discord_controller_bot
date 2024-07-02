@@ -5,7 +5,7 @@ const port = 3000;
 
 // Basic route
 app.get("/", (req, res) => {
-  res.send("Hello World! fixed: not adding success to sheet");
+  res.send("Hello World! fixed: break loop upon success");
 });
 
 
@@ -36,7 +36,7 @@ async function run_background_process(){
         }
 
         await save_completed_task("Sheet1", data);
-        return res.send({success: true, message: "received"});
+        return
       } else {
         data["status"] = "failed";
 
