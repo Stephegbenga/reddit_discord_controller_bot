@@ -110,11 +110,19 @@ async function send_post(post_link, message, platform){
 }
 
 
+function get_message(){
+  const filename = "message.txt"
+  // Read the file synchronously (you can use asynchronous methods if preferred)
+  const data = fs.readFileSync(filename, 'utf8');
+  return data
+}
+
 
 module.exports = {
   get_tasks,
   get_completed_tasks,
   save_completed_task,
   get_random_sender,
-  send_post
+  send_post,
+  get_message
 };

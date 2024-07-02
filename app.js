@@ -1,4 +1,4 @@
-const {get_tasks, get_completed_tasks, save_completed_task, send_post} = require("./utils");
+const {get_tasks, get_completed_tasks, save_completed_task, send_post, get_message} = require("./utils");
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -26,7 +26,8 @@ async function run_background_process(){
 
     if (!task_exist) {
       if (reddit_channel.includes("comments")) {
-        let response = await send_post(reddit_channel, "Any one", "reddit");
+        let message = get_message()
+        let response = await send_post(reddit_channel, message, "reddit");
         if (response.data.success) {
           data["status"] = "success";
         } else {
