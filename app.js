@@ -1,7 +1,7 @@
 const {get_tasks, get_completed_tasks, save_completed_task, send_post} = require("./utils");
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = 3000;
 
 // Basic route
 app.get("/", (req, res) => {
@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 
 
 
-app.get("/trigger_automation", async (req, res) => {
+async function run_background_process(){
   let all_tasks = await get_tasks();
   let completed_tasks = await get_completed_tasks();
 
@@ -44,6 +44,11 @@ app.get("/trigger_automation", async (req, res) => {
     }
   }
 
+}
+
+
+app.get("/trigger_automation", async (req, res) => {
+  run_background_process()
   return res.send({success: true, message: "received"});
 });
 
