@@ -28,7 +28,7 @@ async function run_background_process(){
       if (reddit_channel.includes("comments")) {
         let message = get_message()
         let response = await send_post(reddit_channel, message, "reddit");
-        if (response.data.success) {
+        if (response.success) {
           data["status"] = "success";
         } else {
           data["status"] = "failed";
