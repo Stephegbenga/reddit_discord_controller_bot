@@ -1,6 +1,6 @@
 const axios = require("axios");
 const fs = require('fs');
-const app_scripts_url = require("./app_scripts_url")
+const app_scripts_url = require("./config")
 
 
 
