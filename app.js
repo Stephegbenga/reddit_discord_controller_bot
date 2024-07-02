@@ -17,7 +17,7 @@ async function run_background_process(){
   for (const task of all_tasks) {
     let reddit_channel = task["Reddit Channel"].trim();
 
-    const task_exist = completed_tasks.some((task) => task["reddit channel"] === reddit_channel);
+    const task_exist = completed_tasks.some((task) => task["reddit channel"].trim() == reddit_channel);
     let data = {
       "creator": task["Name"],
       "reddit channel": task["Reddit Channel"],
