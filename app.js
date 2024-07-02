@@ -1,7 +1,7 @@
 const {get_tasks, get_completed_tasks, save_completed_task, send_post} = require("./utils");
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // Basic route
 app.get("/", (req, res) => {
@@ -15,9 +15,9 @@ app.get("/trigger_automation", async (req, res) => {
   let completed_tasks = await get_completed_tasks();
 
   for (const task of all_tasks) {
-    let reddit_channel = task["reddit channel"].trim();
+    let reddit_channel = task["Reddit Channel"].trim();
 
-    const task_exist = completed_tasks.some((task) => task["Reddit Channel"].trim() === reddit_channel);
+    const task_exist = completed_tasks.some((task) => task["reddit channel"] === reddit_channel);
     let data = {
       "creator": task["Name"],
       "reddit channel": task["Reddit Channel"],
@@ -26,9 +26,8 @@ app.get("/trigger_automation", async (req, res) => {
 
     if (!task_exist) {
       if (reddit_channel.includes("comments")) {
-        let response = await send_post(reddit_channel, "hello there", "reddit");
-
-        if (response.success) {
+        let response = await send_post(reddit_channel, "Any one", "reddit");
+        if (response.data.success) {
           data["status"] = "success";
         } else {
           data["status"] = "failed";

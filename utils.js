@@ -28,7 +28,7 @@ async function get_tasks(sheet_name = "Completed", column_filters = [4, 6]) {
 async function get_completed_tasks(sheet_name = "Sheet1") {
   try {
     let config = {
-      method: "post",
+      method: "get",
       maxBodyLength: Infinity,
       url: `${app_scripts_url.get_completed_tasks}?sheet=${sheet_name}`,
       headers: {},
@@ -85,7 +85,6 @@ function get_random_sender(){
 
 async function send_post(post_link, message, platform){
   let sender = get_random_sender()
-
   try {
     let payload = JSON.stringify({
       post_link: post_link,
